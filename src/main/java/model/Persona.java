@@ -7,12 +7,16 @@ public class Persona {
 	String apellido;
 	String email;
 	
-	public Persona(int id, String nombre, String apellido, String email) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-	}
+	
+    public Persona(int id, String nombre, String apellido, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+    }
+	
+	public Persona() {}
+	
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;
 	}

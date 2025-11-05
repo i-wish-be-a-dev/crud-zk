@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import model.Persona;
@@ -40,27 +41,24 @@ public class PersonaDAO {
 		return null;
 	}
 	
-	public void agregarPersona(Persona persona) {
-		
-		String sql = "INSERT INTO Persona (nombre,apellido,email) VALUES (?,?,?)";
-		
-		try {
-			
-			
-			Connection con = Conexion.getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1,persona.getNombre());
-			ps.setString(2,persona.getApellido());	
-			ps.setString(3,persona.getEmail());
-			ps.executeUpdate();
-			con.close();
-			System.out.println("Persona agregada: " + persona.getNombre());
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+	 public boolean agregarPersona(Persona persona) {
+	        String sql = "INSERT INTO persona (nombre, apellido, email) VALUES (?, ?, ?)";
+	        try (Connection con = Conexion.getConnection();
+	             PreparedStatement ps = con.prepareStatement(sql)) {
+
+	            ps.setString(1, persona.getNombre());
+	            ps.setString(2, persona.getApellido());
+	            ps.setString(3, persona.getEmail());
+
+	            int filas = ps.executeUpdate();
+	            System.out.println("Persona agregada: " + persona.getNombre());
+	            return filas > 0;
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
 	
 	
 }
