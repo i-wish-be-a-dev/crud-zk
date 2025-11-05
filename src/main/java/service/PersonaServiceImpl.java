@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.zkoss.bind.annotation.Init;
+
 import model.Persona;
 
 public class PersonaServiceImpl implements PersonaService {
@@ -16,6 +18,7 @@ public class PersonaServiceImpl implements PersonaService {
         PERSONAS.add(new Persona(3, "Carlos", "López", "carlos@mail.com"));
     }
 	@Override
+	@Init
 	public List<Persona> listarPersonas() {
 		
 		return PERSONAS;
