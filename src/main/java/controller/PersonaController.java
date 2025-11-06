@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -25,6 +27,14 @@ public class PersonaController extends SelectorComposer<Component> {
 
     private PersonaService personaService = new PersonaServiceImpl();
 
+    
+    @Init
+    public void init() {
+		List<Persona> personas = personaService.listarPersonas();
+		personaListbox.setModel(new ListModelList<>(personas));
+	}
+
+    
     @Listen("onClick = #searchButton")
     public void search() {
         String keyword = keywordBox.getValue();
@@ -39,4 +49,13 @@ public class PersonaController extends SelectorComposer<Component> {
         apellidoLabel.setValue("Apellido: " + selected.getApellido());
         emailLabel.setValue("Email: " + selected.getEmail());
     }
+    
+    @Listen("onCreate = #personaListbox")
+    public void initList() {
+        // Mostrar todas las personas al iniciar
+        List<Persona> personas = personaService.listarPersonas();
+        personaListbox.setModel(new ListModelList<>(personas));
+    }
+
+    
 }
