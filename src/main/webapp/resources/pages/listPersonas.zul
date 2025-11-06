@@ -1,6 +1,6 @@
 <?page title="Buscar Personas" contentType="text/html;charset=UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window title="Buscar Personas" width="600px" border="normal"
+    <window title="mainWindow" width="600px" border="normal"
             apply="controller.PersonaController">
 
         <!-- Área de búsqueda -->
@@ -34,6 +34,12 @@
             <label id="nombreLabel" />
             <label id="apellidoLabel" />
             <label id="emailLabel" />
+	       <button id="editButton" label="Ocultar detalle"
+	        iconSclass="z-icon-eye-slash"
+	        style="margin-top:10px"
+	        visible="false" />
+
+                    
         </vlayout>
 
     </window>
